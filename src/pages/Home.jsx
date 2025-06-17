@@ -27,7 +27,7 @@ const localVideos = [
 function Home() {
 	return (
 		<div className="min-h-screen bg-black py-8 px-2 md:px-8">
-			<h1 className="text-3xl md:text-4xl font-extrabold text-white mb-6 text-left tracking-tight">
+			<h1 className="text-2xl md:text-4xl font-semibold text-white mb-6 text-left tracking-tight">
 				Recommended Videos
 			</h1>
 			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
