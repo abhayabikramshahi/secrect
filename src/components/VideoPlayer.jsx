@@ -47,10 +47,67 @@ function VideoPlayer() {
     }
   }, [quality, ext]);
 
+  // Find up next video (the other user's video)
+  const upNext = id === '2023-12-10-02-02-21'
+    ? {
+        id: '2025-06-16 22-35-52',
+        title: 'Sample Local Video',
+        channel: 'Siwani',
+        ext: 'mkv',
+        isLocal: true,
+        user: 'siwani',
+      }
+    : {
+        id: '2023-12-10-02-02-21',
+        title: 'Girl Showing Her Tits Ani Maja Aayo',
+        channel: 'Sneha',
+        ext: 'mp4',
+        isLocal: true,
+        user: 'sneha',
+      };
+
+  // Manual play/pause and fullscreen
+  const handlePlayPause = () => {
+    if (videoRef.current) {
+      if (videoRef.current.paused) {
+        videoRef.current.play();
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  };
+  const handleFullscreen = () => {
+    if (videoRef.current) {
+      if (videoRef.current.requestFullscreen) {
+        videoRef.current.requestFullscreen();
+      } else if (videoRef.current.webkitRequestFullscreen) {
+        videoRef.current.webkitRequestFullscreen();
+      } else if (videoRef.current.msRequestFullscreen) {
+        videoRef.current.msRequestFullscreen();
+      }
+    }
+  };
+  React.useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === 'f' || e.key === 'F') {
+        handleFullscreen();
+      }
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, []);
+
+  // Don't autoplay on load
+  React.useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
+  }, [id]);
+
   // Determine video MIME type
   const getMimeType = (ext) => {
     if (ext === 'mp4') return 'video/mp4';
-    if (ext === 'mkv' || ext === 'mk4') return 'video/webm'; // webm is more widely supported for mkv/mk4 in browsers
+    if (ext === 'mkv' || ext === 'mk4') return 'video/webm';
     return `video/${ext}`;
   };
 
@@ -70,26 +127,16 @@ function VideoPlayer() {
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-8">
         {/* Main Video Section */}
         <div className="flex-1">
-          <div className="bg-black rounded-lg overflow-hidden shadow-lg relative">
+          <div className="bg-black rounded-lg overflow-hidden shadow-lg relative flex justify-center items-center">
             <video
               ref={videoRef}
               controls
-              autoPlay
-              className="w-full aspect-video bg-black"
+              className="w-full max-w-5xl aspect-video bg-black"
+              style={{ minHeight: '360px', maxHeight: '80vh' }}
             >
               {/* Quality sources for mp4, fallback to single source for other extensions */}
               {ext === 'mp4' ? (
-                <>
-                  {quality === '1080p' && (
-                    <source src={`/videos/${id}_1080p.mp4`} type="video/mp4" />
-                  )}
-                  {quality === '720p' && (
-                    <source src={`/videos/${id}_720p.mp4`} type="video/mp4" />
-                  )}
-                  {quality === '480p' && (
-                    <source src={`/videos/${id}_480p.mp4`} type="video/mp4" />
-                  )}
-                </>
+                <source src={`/videos/${id}.mp4`} type="video/mp4" />
               ) : (
                 <source src={`/videos/${id}.${ext}`} type={getMimeType(ext)} />
               )}
@@ -104,7 +151,13 @@ function VideoPlayer() {
               <span>•</span>
               <span>Jun 16, 2025</span>
               <span className="hidden md:inline">•</span>
-              <span className="hidden md:inline">Channel Name</span>
+              {/* User profile links, now dynamic based on video */}
+              {id === '2023-12-10-02-02-21' && (
+                <a href="/user/sneha" className="text-orange-400 hover:underline font-semibold">Sneha</a>
+              )}
+              {id === '2025-06-16 22-35-52' && (
+                <a href="/user/siwani" className="text-orange-400 hover:underline font-semibold">Siwani</a>
+              )}
             </div>
             <div className="flex gap-2 mt-2">
               <button className="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-full font-semibold flex items-center gap-2">
@@ -160,26 +213,22 @@ function VideoPlayer() {
             </div>
           </div>
         </div>
-        {/* Sidebar: Up Next (placeholder) */}
+        {/* Sidebar: Up Next */}
         <div className="w-full md:w-80 flex-shrink-0 mt-8 md:mt-0">
-          <div className="bg-[#181818] rounded-xl p-4">
-            <h2 className="text-lg font-bold mb-4">Up Next</h2>
-            <div className="space-y-4">
-              <div className="flex gap-3 items-center">
-                <div className="w-24 h-14 bg-gray-700 rounded overflow-hidden"></div>
-                <div className="flex-1">
-                  <div className="text-white font-semibold truncate">Sample Up Next Video</div>
-                  <div className="text-xs text-gray-400">Channel Name • 123K views</div>
+          <div className="bg-[#181818] rounded-xl p-0 overflow-hidden">
+            <h2 className="text-lg font-bold mb-4 px-4 pt-4">Up Next</h2>
+            <div className="divide-y divide-gray-800">
+              <a href={`/video/${upNext.id}?ext=${upNext.ext}`} className="flex gap-3 items-center hover:bg-gray-900 transition px-4 py-3 cursor-pointer group">
+                <div className="w-32 h-20 bg-black rounded overflow-hidden flex items-center justify-center relative">
+                  {/* Thumbnail preview for up next video */}
+                  <video src={`/videos/${upNext.id}.${upNext.ext}`} className="w-full h-full object-cover" preload="metadata" muted />
+                  <span className="absolute bottom-1 right-1 bg-black bg-opacity-70 text-white text-xs px-2 py-0.5 rounded">00:30</span>
                 </div>
-              </div>
-              <div className="flex gap-3 items-center">
-                <div className="w-24 h-14 bg-gray-700 rounded overflow-hidden"></div>
-                <div className="flex-1">
-                  <div className="text-white font-semibold truncate">Another Up Next Video</div>
-                  <div className="text-xs text-gray-400">Channel Name • 99K views</div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-white font-semibold truncate group-hover:text-orange-400">{upNext.title}</div>
+                  <div className="text-xs text-gray-400 mt-1">by {upNext.channel}</div>
                 </div>
-              </div>
-              {/* Add more up next videos as needed */}
+              </a>
             </div>
           </div>
         </div>

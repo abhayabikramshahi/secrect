@@ -3,13 +3,24 @@ import VideoCard from '../components/VideoCard';
 
 const localVideos = [
 	{
-		id: '2025-06-16 22-35-52',
-		title: 'Aaja maile mero bubu dekhaye maja aaigo sathi haru sanga huda..',
+		id: '2023-12-10-02-02-21',
+		title: 'Girl Showing Her Tits Ani Maja Aayo',
 		views: '1.2K',
 		duration: '00:30',
-		channel: 'Akanshya',
+		channel: 'Sneha',
+		isLocal: true,
+		ext: 'mp4',
+		user: 'sneha',
+	},
+	{
+		id: '2025-06-16 22-35-52',
+		title: 'Sample Local Video',
+		views: '1.2K',
+		duration: '00:30',
+		channel: 'Siwani',
 		isLocal: true,
 		ext: 'mkv',
+		user: 'siwani',
 	},
 ];
 

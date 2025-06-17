@@ -91,21 +91,6 @@ function Navbar() {
             <button className="bg-orange-600 hover:bg-orange-500 text-black font-semibold px-3 py-1 rounded-md transition text-xs md:text-base">
               CANDY AI
             </button>
-            <Link
-              to="/profile"
-              aria-label="User Profile"
-              className="hover:text-orange-500 transition rounded-full border-2 border-transparent hover:border-orange-500 p-1 ml-2"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8 rounded-full"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z" />
-                <path d="M12 14c-4 0-7 2-7 5v1h14v-1c0-3-3-5-7-5z" />
-              </svg>
-            </Link>
           </div>
         </div>
 

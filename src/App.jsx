@@ -17,6 +17,7 @@ import Pornstars from "./pages/Pornstars";
 import FuckNow from "./pages/FuckNow";
 import Community from "./pages/Community";
 import PhotosGIFs from "./pages/PhotosGIFs";
+import UserProfile from "./pages/UserProfile";
 
 import "./App.css"; 
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:username" element={<Profile />} />
           <Route path="/video/:id" element={<VideoPlayer />} />
           <Route path="/video-card" element={<VideoCard />} />
           <Route path="/porn-videos" element={<PornVideos />} />
@@ -42,6 +44,7 @@ function App() {
           <Route path="/fuck-now" element={<FuckNow />} />
           <Route path="/community" element={<Community />} />
           <Route path="/photos-gifs" element={<PhotosGIFs />} />
+          <Route path="/user/:username" element={<UserProfile />} />
         </Routes>
       </Router>
     </>
