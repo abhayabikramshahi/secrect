@@ -14,7 +14,7 @@ const localVideos = [
 	},
 	{
 		id: '2025-06-16 22-35-52',
-		title: 'Sample Local Video',
+		title: 'Bubu Khelaudai xu keta ho aau chika!!',
 		views: '1.2K',
 		duration: '00:30',
 		channel: 'Siwani',
@@ -26,11 +26,11 @@ const localVideos = [
 
 function Home() {
 	return (
-		<div className="min-h-screen bg-black py-8 px-2 md:px-8">
-			<h1 className="text-2xl md:text-4xl font-semibold text-white mb-6 text-left tracking-tight">
+		<div className="min-h-screen bg-black py-4 px-1 md:px-8">
+			<h1 className="text-xl md:text-4xl font-semibold text-white mb-4 text-left tracking-tight px-2 md:px-0">
 				Recommended Videos
 			</h1>
-			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+			<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 md:gap-6">
 				{localVideos.map((video) => (
 					<VideoCard key={video.id} video={video} />
 				))}

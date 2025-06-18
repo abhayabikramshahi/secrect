@@ -40,8 +40,14 @@ function VideoCard({ video }) {
 		setLiked((prev) => !prev);
 	};
 
+	const handleVideoClick = (e) => {
+		// Always reload the page when navigating to a video
+		e.preventDefault();
+		window.location.href = `/video/${video.id}?ext=${video.ext || 'mp4'}`;
+	};
+
 	return (
-		<Link to={`/video/${video.id}?ext=${video.ext || 'mp4'}`}>
+		<div onClick={handleVideoClick}>
 			<div className="rounded-lg overflow-hidden bg-[#111] hover:bg-[#1a1a1a] transition duration-200 cursor-pointer">
 				{video.isLocal ? (
 					thumb ? (
@@ -91,7 +97,7 @@ function VideoCard({ video }) {
 					</div>
 				</div>
 			</div>
-		</Link>
+		</div>
 	);
 }
 

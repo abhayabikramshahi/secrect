@@ -20,12 +20,34 @@ A modern, responsive video streaming web app inspired by YouTube and Pornhub, bu
    ```
 2. **Add your videos:**
    - Place video files in `public/videos/` (e.g. `2023-12-10-02-02-21.mp4`, `2025-06-16 22-35-52.mkv`)
-3. **Run the app:**
+3. **Run the app locally:**
    ```bash
    npm run dev
    ```
-4. **Open in browser:**
-   - Visit [http://localhost:5173](http://localhost:5173)
+4. **Build for production:**
+   ```bash
+   npm run build
+   ```
+5. **Preview production build locally:**
+   ```bash
+   npm run preview
+   ```
+6. **Deploy to Vercel:**
+   - Make sure you have a `vercel.json` file with the following content:
+     ```json
+     {
+       "builds": [
+         { "src": "vite.config.js", "use": "@vercel/static-build", "config": { "distDir": "dist" } }
+       ],
+       "routes": [
+         { "src": "/(.*)", "dest": "/index.html" }
+       ]
+     }
+     ```
+   - Run:
+     ```bash
+     vercel --prod
+     ```
 
 ## Project Structure
 

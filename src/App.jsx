@@ -18,6 +18,7 @@ import FuckNow from "./pages/FuckNow";
 import Community from "./pages/Community";
 import PhotosGIFs from "./pages/PhotosGIFs";
 import UserProfile from "./pages/UserProfile";
+import NotFound from "./pages/NotFound";
 
 import "./App.css"; 
 
@@ -45,6 +46,7 @@ function App() {
           <Route path="/community" element={<Community />} />
           <Route path="/photos-gifs" element={<PhotosGIFs />} />
           <Route path="/user/:username" element={<UserProfile />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </>
