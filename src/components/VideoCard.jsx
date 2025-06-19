@@ -12,27 +12,25 @@ function VideoCard({ video }) {
 		const videoEl = videoRef.current;
 		const canvasEl = canvasRef.current;
 		if (!videoEl || !canvasEl) return;
-		const seekAndCapture = () => {
-			const capture = () => {
-				canvasEl.width = videoEl.videoWidth;
-				canvasEl.height = videoEl.videoHeight;
-				canvasEl
-					.getContext('2d')
-					.drawImage(
-						videoEl,
-						0,
-						0,
-						canvasEl.width,
-						canvasEl.height
-					);
-				setThumb(canvasEl.toDataURL('image/png'));
-			};
-			videoEl.removeEventListener('seeked', capture);
-			videoEl.addEventListener('seeked', capture, { once: true });
-			videoEl.currentTime = 0.1;
+		const onLoaded = () => {
+			videoEl.currentTime = 0.01;
 		};
-		videoEl.addEventListener('loadedmetadata', seekAndCapture, { once: true });
-		return () => videoEl.removeEventListener('loadedmetadata', seekAndCapture);
+		const capture = () => {
+			canvasEl.width = videoEl.videoWidth;
+			canvasEl.height = videoEl.videoHeight;
+			canvasEl.getContext('2d').drawImage(videoEl, 0, 0, canvasEl.width, canvasEl.height);
+			setThumb(canvasEl.toDataURL('image/png'));
+			videoEl.removeEventListener('seeked', capture);
+			videoEl.removeEventListener('loadedmetadata', onLoaded);
+		};
+		videoEl.addEventListener('loadedmetadata', onLoaded, { once: true });
+		videoEl.addEventListener('seeked', capture, { once: true });
+		videoEl.preload = 'auto';
+		videoEl.load();
+		return () => {
+			videoEl.removeEventListener('loadedmetadata', onLoaded);
+			videoEl.removeEventListener('seeked', capture);
+		};
 	}, [video.isLocal, thumb]);
 
 	const handleLike = (e) => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const NAV_ITEMS = [
   { label: "Home", path: "/" },
@@ -13,15 +13,17 @@ const NAV_ITEMS = [
 ];
 
 function Navbar() {
-  const location = useLocation();
   const [menuOpen, setMenuOpen] = React.useState(false);
   const isActive = (path) =>
-    location.pathname === path || location.pathname.startsWith(path + "/");
+    window.location.pathname === path ||
+    window.location.pathname.startsWith(path + "/");
 
   // Close menu on route change
   React.useEffect(() => {
-    setMenuOpen(false);
-  }, [location.pathname]);
+    const onPop = () => setMenuOpen(false);
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
 
   // Show nav links on mobile with a 'menu' icon (like a button)
   return (
@@ -42,9 +44,30 @@ function Navbar() {
               stroke="currentColor"
               strokeWidth={2}
             >
-              <rect x="3" y="6" width="18" height="2" rx="1" fill="currentColor" />
-              <rect x="3" y="11" width="18" height="2" rx="1" fill="currentColor" />
-              <rect x="3" y="16" width="18" height="2" rx="1" fill="currentColor" />
+              <rect
+                x="3"
+                y="6"
+                width="18"
+                height="2"
+                rx="1"
+                fill="currentColor"
+              />
+              <rect
+                x="3"
+                y="11"
+                width="18"
+                height="2"
+                rx="1"
+                fill="currentColor"
+              />
+              <rect
+                x="3"
+                y="16"
+                width="18"
+                height="2"
+                rx="1"
+                fill="currentColor"
+              />
             </svg>
           </button>
 
@@ -52,10 +75,12 @@ function Navbar() {
           <Link
             to="/"
             className="text-3xl md:text-4xl font-black flex items-center gap-1 tracking-tight leading-tight select-none"
-            style={{ letterSpacing: '-0.04em' }}
+            style={{ letterSpacing: "-0.04em" }}
           >
-            <span className="text-white drop-shadow-lg">Porn</span>
-            <span className="bg-gradient-to-r from-orange-500 to-yellow-400 px-2 rounded text-black font-extrabold shadow">hub</span>
+            <span className="text-white drop-shadow-lg">Nep</span>
+            <span className="bg-gradient-to-r from-orange-500 to-yellow-400 px-2 rounded text-black font-extrabold shadow">
+              hub
+            </span>
           </Link>
 
           {/* Right Side Buttons */}
@@ -63,14 +88,14 @@ function Navbar() {
             <Link
               to="/login"
               className="bg-gray-900 hover:bg-gray-800 text-white font-semibold px-4 py-1.5 rounded-lg transition text-xs md:text-base border border-gray-800 shadow-sm tracking-wide"
-              style={{ letterSpacing: '0.02em' }}
+              style={{ letterSpacing: "0.02em" }}
             >
               Login
             </Link>
             <Link
               to="/register"
               className="bg-orange-500 hover:bg-orange-400 text-black font-bold px-4 py-1.5 rounded-lg transition text-xs md:text-base shadow tracking-wide"
-              style={{ letterSpacing: '0.02em' }}
+              style={{ letterSpacing: "0.02em" }}
             >
               Sign Up
             </Link>
@@ -80,7 +105,7 @@ function Navbar() {
         {/* ROW 2: Main Nav Links (responsive) */}
         <ul
           className={`flex-col md:flex-row flex-wrap md:flex justify-center space-y-2 md:space-y-0 space-x-0 md:space-x-8 text-sm md:text-base font-bold uppercase border-b border-gray-900 pb-1 md:pb-2 bg-black md:bg-transparent transition-all duration-300 ${
-            menuOpen ? 'flex' : 'hidden md:flex'
+            menuOpen ? "flex" : "hidden md:flex"
           }`}
         >
           {NAV_ITEMS.map(({ label, path }) => (
