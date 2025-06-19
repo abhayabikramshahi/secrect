@@ -48,23 +48,36 @@ function VideoPlayer() {
   }, [quality, ext]);
 
   // Find up next video (the other user's video)
-  const upNext = id === '2023-12-10-02-02-21'
-    ? {
-        id: '2025-06-16 22-35-52',
-        title: 'Sample Local Video',
-        channel: 'Siwani',
-        ext: 'mkv',
-        isLocal: true,
-        user: 'siwani',
-      }
-    : {
-        id: '2023-12-10-02-02-21',
-        title: 'Girl Showing Her Tits Ani Maja Aayo',
-        channel: 'Sneha',
-        ext: 'mp4',
-        isLocal: true,
-        user: 'sneha',
-      };
+let upNext;
+
+if (id === '2023-12-10-02-02-21') {
+  upNext = {
+    id: '2025-06-16 22-35-52',
+    title: 'Sample Local Video',
+    channel: 'Siwani',
+    ext: 'mkv',
+    isLocal: true,
+    user: 'siwani',
+  };
+} else if (id === 'some-other-id') {
+  upNext = {
+    id: '2023-12-10-02-02-21',
+    title: 'Girl Showing Her Tits Ani Maja Aayo',
+    channel: 'Sneha',
+    ext: 'mp4',
+    isLocal: true,
+    user: 'sneha',
+  };
+} else {
+  upNext = {
+    id: 'VID_20250617_232735_107',
+    title: 'Girl Showing Her Tits Ani Maja Aayo',
+    channel: 'Sneha',
+    ext: 'mp4',
+    isLocal: true,
+    user: 'sneha',
+  };
+}
 
   // Manual play/pause and fullscreen
   const handlePlayPause = () => {

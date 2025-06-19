@@ -22,6 +22,26 @@ const localVideos = [
 		ext: 'mkv',
 		user: 'siwani',
 	},
+	{
+		id: 'VID_20250617_232735_107',
+		title: 'VID_20250617_232735_107',
+		views: '1.2K',
+		duration: '00:30',
+		channel: 'Siwani',
+		isLocal: true,
+		ext: 'mp4',
+		user: 'siwani',
+	},
+	{
+		id: 'VID_20250617_232751_494',
+		title: 'VID_20250617_232751_494',
+		views: '1.2K',
+		duration: '00:30',
+		channel: 'Siwani',
+		isLocal: true,
+		ext: 'mp4',
+		user: 'siwani',
+	},
 ];
 
 function Home() {
