@@ -42,6 +42,36 @@ const localVideos = [
 		ext: 'mp4',
 		user: 'siwani',
 	},
+	{
+		id: '2023-10-17-00-35-43',
+		title: '2023-10-17-00-35-43',
+		views: '1.2K',
+		duration: '00:30',
+		channel: 'Sneha',
+		isLocal: true,
+		ext: 'mp4',
+		user: 'sneha',
+	},
+	{
+		id: '2023-09-01-18-04-42',
+		title: '2023-09-01-18-04-42',
+		views: '1.2K',
+		duration: '00:30',
+		channel: 'Sneha',
+		isLocal: true,
+		ext: 'mp4',
+		user: 'sneha',
+	},
+	{
+		id: 'or jor se kro na video 1',
+		title: 'or jor se kro na video 1',
+		views: '1.2K',
+		duration: '00:30',
+		channel: 'Sneha',
+		isLocal: true,
+		ext: 'mp4',
+		user: 'sneha',
+	},
 ];
 
 function Home() {

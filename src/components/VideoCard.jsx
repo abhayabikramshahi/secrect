@@ -61,9 +61,12 @@ function VideoCard({ video }) {
 							<video
 								ref={videoRef}
 								src={`/videos/${video.id}.${video.ext}`}
-								className="w-full h-48 object-cover bg-black hidden"
+								className="w-full h-48 object-cover bg-black"
 								preload="metadata"
 								muted
+								controls
+								controlsList="nodownload"
+								style={{ pointerEvents: 'none' }}
 							/>
 							<canvas ref={canvasRef} className="hidden" />
 							<div className="w-full h-48 flex items-center justify-center bg-black text-gray-500 text-xs">

@@ -11,6 +11,24 @@ const localVideos = [
 		isLocal: true,
 		ext: 'mkv',
 	},
+	{
+		id: '2023-09-01-18-04-42',
+		title: '2023-09-01-18-04-42',
+		views: '1.2K',
+		duration: '00:30',
+		channel: 'Akanshya',
+		isLocal: true,
+		ext: 'mp4',
+	},
+	{
+		id: 'or jor se kro na video 1',
+		title: 'or jor se kro na video 1',
+		views: '1.2K',
+		duration: '00:30',
+		channel: 'Akanshya',
+		isLocal: true,
+		ext: 'mp4',
+	},
 ];
 
 function Cateogry() {
