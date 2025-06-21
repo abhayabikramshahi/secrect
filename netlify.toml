@@ -1,0 +1,21 @@
+# Netlify configuration file
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Uncomment below to customize cache (optional)
+#[build.environment]
+#  NODE_VERSION = "18"
+
+#[build.cache]
+#  paths = ["node_modules/.cache"]
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
